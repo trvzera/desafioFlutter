@@ -1,6 +1,4 @@
-  import 'package:desafio/pages/telaCadastro.dart';
 import 'package:desafio/pages/telaHome.dart';
-import 'package:desafio/pages/telalogin.dart';
 import 'package:flutter/material.dart';
 
   class TelaInicial extends StatefulWidget {

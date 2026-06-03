@@ -1,7 +1,5 @@
-  import 'package:desafio/pages/telaInicial.dart';
+import 'package:desafio/pages/telaInicial.dart';
 import 'package:flutter/material.dart';
-  import 'package:email_validator/email_validator.dart';
-  import './telaHome.dart';
 
   class TelaCadastro extends StatefulWidget {
     @override
