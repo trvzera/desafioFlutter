@@ -14,6 +14,7 @@ class _TelaLoginState extends State<TelaLogin> {
 
   validarEmail() {
     String email = _meuController.text;
+    String senha = senhaController.text;
     final RegExp emailRegExp = RegExp(
       r'^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$',
     );
@@ -23,7 +24,13 @@ class _TelaLoginState extends State<TelaLogin> {
       } else if (!emailRegExp.hasMatch(email)) {
         _mensagem = 'Formato de e-mail inválido.';
       } else {
-        _mensagem = "Valido!";
+        if (senha.isEmpty){
+            _mensagem = "Email Valido! Mas Digite uma senha!";
+        }
+        else {
+          _mensagem = "Válido!";
+        }
+        
       }
     });
   }
