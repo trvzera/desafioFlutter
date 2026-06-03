@@ -3,40 +3,59 @@ import 'package:flutter/material.dart';
   import 'package:email_validator/email_validator.dart';
   import './telaHome.dart';
 
-  class TelaLogin extends StatefulWidget {
+  class TelaCadastro extends StatefulWidget {
     @override
-    State<TelaLogin> createState() => _TelaLoginState();
+    State<TelaCadastro> createState() => _TelaCadastroState();
   }
 
-  class _TelaLoginState extends State<TelaLogin> {
+  class _TelaCadastroState extends State<TelaCadastro> {
     final TextEditingController _meuController = TextEditingController();
-      final TextEditingController senhaController = TextEditingController();
+    final TextEditingController senhaController = TextEditingController();
+    final TextEditingController senhaController2 = TextEditingController();
+    final TextEditingController nomeController = TextEditingController();
 
-    String _mensagem = "Digite o seu login:";
+
+    String _mensagem = "Vamos criar sua conta!";
 
     validarEmail() {
       String email = _meuController.text;
       String senha = senhaController.text;
+      String senha2 = senhaController2.text;
+      String nome = nomeController.text;
+
       final RegExp emailRegExp = RegExp(
         r'^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$',
       );
       setState(() {
-        if (email.isEmpty) {
-          _mensagem = 'O e-mail não pode estar vazio.';
-        } else if (!emailRegExp.hasMatch(email)) {
-          _mensagem = 'Formato de e-mail inválido.';
-        } else {
-          if (senha.isEmpty){
-              _mensagem = "Email Valido! Mas Digite uma senha!";
+        if(nome.isEmpty){
+          _mensagem = "O nome não pode ser vazio!";
+        }
+        else{
+          if (email.isEmpty) {
+            _mensagem = 'O e-mail não pode estar vazio.';
+          } else if (!emailRegExp.hasMatch(email)) {
+            _mensagem = 'Formato de e-mail inválido.';
+          } else {
+            if (senha.isEmpty){
+                _mensagem = "Email Valido! Mas Digite uma senha!";
+            }
+            else if (senha.length < 6) {
+              _mensagem = "A senha deve ter pelo menos 6 caracteres";
+            }
+            else {
+              _mensagem = "Válido!";
+              if (senha != senha2){
+                _mensagem = "As senhas devem ser iguais!";
+              }
+              else{
+                _mensagem = "Cadastro realizado com sucesso!";
+              Navigator.push(
+                context,
+                MaterialPageRoute(builder: (context) => TelaInicial()),
+                );
+              }
+            }
           }
-          else {
-            _mensagem = "Válido!";
-            Navigator.push(
-              context,
-              MaterialPageRoute(builder: (context) => (TelaInicial())),
-              );
-          }
-          
         }
       });
     }
@@ -46,7 +65,7 @@ import 'package:flutter/material.dart';
       return Scaffold(
         appBar: AppBar(
           title: const Text(
-            'LOGIN',
+            'CADASTRO',
             style: TextStyle(
                 fontSize: 32,
                 fontWeight: FontWeight.bold,
@@ -70,6 +89,15 @@ import 'package:flutter/material.dart';
             ),
             const SizedBox(height: 20),
             TextField(
+              controller: nomeController,
+              decoration: const InputDecoration(
+                labelText: 'Digite seu nome',
+                border: OutlineInputBorder(),
+                prefixIcon: Icon(Icons.person_2)
+              ),
+            ),
+            const SizedBox(height: 20),
+            TextField(
               controller: _meuController,
               decoration: const InputDecoration(
                 labelText: 'Digite seu email',
@@ -87,9 +115,17 @@ import 'package:flutter/material.dart';
                 labelText: 'Digite sua senha',
                 border: OutlineInputBorder(),
                 prefixIcon: Icon(Icons.lock)
-
               ),
-
+            ),
+            const SizedBox(height: 20),
+            TextField(
+              controller: senhaController2,
+              obscureText: true,
+              decoration: const InputDecoration(
+                labelText: 'Confirme sua senha',
+                border: OutlineInputBorder(),
+                prefixIcon: Icon(Icons.lock)
+              ),
             ),
             const SizedBox(height: 20),
             ElevatedButton(
@@ -98,7 +134,7 @@ import 'package:flutter/material.dart';
                   validarEmail();
                 });
               },
-              child: const Text('Entrar'),
+              child: const Text('Criar'),
             ),
           ]),
         ),
