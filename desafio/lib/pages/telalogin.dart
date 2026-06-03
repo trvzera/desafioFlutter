@@ -8,6 +8,8 @@ class TelaLogin extends StatefulWidget {
 
 class _TelaLoginState extends State<TelaLogin> {
   final TextEditingController _meuController = TextEditingController();
+    final TextEditingController senhaController = TextEditingController();
+
   String _mensagem = "Digite o seu login:";
 
   validarEmail() {
@@ -60,8 +62,21 @@ class _TelaLoginState extends State<TelaLogin> {
               labelText: 'Digite seu email',
               hintText: 'Ex: seuemail@gmail.com',
               border: OutlineInputBorder(),
+              prefixIcon: Icon(Icons.email)
             ),
             keyboardType: TextInputType.emailAddress,
+          ),
+          const SizedBox(height: 20),
+          TextField(
+            controller: senhaController,
+            obscureText: true,
+            decoration: const InputDecoration(
+              labelText: 'Digite sua senha',
+              border: OutlineInputBorder(),
+              prefixIcon: Icon(Icons.lock)
+
+            ),
+
           ),
           const SizedBox(height: 20),
           ElevatedButton(
