@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'telaAnimatedContainer.dart';
+import 'telaPageRoute.dart';
 
 class TelaDetalhes extends StatelessWidget {
   const TelaDetalhes({super.key});
@@ -38,6 +39,19 @@ class TelaDetalhes extends StatelessWidget {
                       MaterialPageRoute(
                         builder: (context) {
                           return const TelaAnimatedContainer();
+                        },
+                      ),
+                    );
+                  },
+                  icon: const Icon(Icons.screenshot_monitor),
+                  label: const Text("Animated Container")),
+              ElevatedButton.icon(
+                  onPressed: () {
+                    Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                        builder: (context) {
+                          return const TelaPageRoute();
                         },
                       ),
                     );
